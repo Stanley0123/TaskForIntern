@@ -1,7 +1,7 @@
 package exceptions;
 
 public class MyException extends Exception{
-    int position = -1;
+    protected int position = -1;
     MyException(){
 
     }

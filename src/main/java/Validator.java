@@ -50,6 +50,9 @@ public class Validator {
                 if (!massive[i].matches(RegexContainer.ourAirportsConditionAndBracket)) {
                     throw new OurAirportsException(i + 1);
                 }
+                else {
+                    throw new FullNameException(i + 1);
+                }
             }
         }
         if (!bracketChecker(bufferString)){
