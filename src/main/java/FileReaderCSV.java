@@ -17,6 +17,7 @@ public class FileReaderCSV {
                 String[] data = row.split(",");
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("fullName", data[1].substring(1, data[1].length() - 1));
+
                 map.put("position", positionSum);
                 positionSum = positionSum + row.length() + 1;
                 list.add(map);
@@ -52,6 +53,7 @@ public class FileReaderCSV {
             map.put("column[14]", data[13].substring(1, data[13].length() - 1));
             raf.close();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Error in translator");
         }
         return map;

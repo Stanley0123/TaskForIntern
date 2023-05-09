@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Search {
     public List<Map<String, Object>> search(String fullName, String filters, List<Map<String, Object>> mapList){
-        int size = 12057;
+        int size = 7184;
         List<Map<String, Object>> list = new ArrayList<>();
         for (int i = 0; i < size; i++){
             if (mapList.get(i).get("fullName").toString().matches("^\\s*" + fullName + ".*")){
