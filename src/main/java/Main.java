@@ -4,6 +4,13 @@ public class Main {
 //        InputNameAndFilter inputNameAndFilter = new InputNameAndFilter();
 //        inputNameAndFilter.input();
         FileReaderCSV fileReaderCSV = new FileReaderCSV();
-        fileReaderCSV.readAll().stream().forEach(x -> x.get("position"));
+//        fileReaderCSV.readAll().stream().forEach(x -> {
+//            System.out.println(Integer.parseInt(x.get("positionStart").toString()) + "   " +  Integer.parseInt(x.get("positionEnd").toString()));
+//        });
+        System.out.println(fileReaderCSV.readAll().stream().count());
+        fileReaderCSV.readAll().stream().forEach(x -> {
+            fileReaderCSV.printable(Integer.parseInt(x.get("position").toString()));
+        });
+//        fileReaderCSV.readIt();
     }
 }

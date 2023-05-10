@@ -1,9 +1,7 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class FileReaderCSV {
     public List<Map<String, Object>> readAll(){
@@ -13,14 +11,15 @@ public class FileReaderCSV {
             BufferedReader csvReader = new BufferedReader(new FileReader(file));
             String row = "";
             int positionSum = 0;
-            while ((row = csvReader.readLine()) != null) {
+            int j = 0;
+            while (((row = csvReader.readLine()) != null) && j != 15) {
                 String[] data = row.split(",");
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("fullName", data[1].substring(1, data[1].length() - 1));
-
                 map.put("position", positionSum);
                 positionSum = positionSum + row.length() + 1;
                 list.add(map);
+                j++;
             }
             csvReader.close();
         }
@@ -57,5 +56,38 @@ public class FileReaderCSV {
             System.out.println("Error in translator");
         }
         return map;
+    }
+    public void printable(int position){
+        try{
+            File file = new File(getClass().getResource(String.format("/%s", "airports.csv")).toURI());
+            RandomAccessFile raf = new RandomAccessFile(file, "r");
+            raf.seek(position);
+            String buf = raf.readLine();
+            String output = new String(buf.getBytes(), StandardCharsets.UTF_8);
+            System.out.println(output);
+            raf.close();
+        }
+        catch (Exception e){
+            System.out.println("Exception in print");
+        }
+    }
+    public void readIt(){
+        try{
+            File file = new File(getClass().getResource(String.format("/%s", "airports.csv")).toURI());
+            BufferedReader csvReader = new BufferedReader(new FileReader(file));
+            char[] buf = new char[2300];
+            csvReader.read(buf, 0, 2300);
+            ArrayList<Character> listok = new ArrayList<>();
+            for (int i = 0; i < 2300; i++){
+                if (i > 1600){
+                    System.out.println(new ArrayList<>(Arrays.asList(buf)).get(i));
+                }
+            }
+            new ArrayList<>(Arrays.asList(buf)).stream().forEach(x -> System.out.println(x));
+            csvReader.close();
+        }
+        catch (Exception e){
+            System.out.println("error in print char");
+        }
     }
 }
